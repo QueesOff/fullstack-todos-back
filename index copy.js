@@ -1,30 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const cors = require("cors");
 const mongoose = require("mongoose");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
-
-// Разрешить все запросы с указанных доменов
-const allowedOrigins = [
-  "https://fullstack-todos-front.vercel.app/",
-  "http://localhost:3000",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-  })
-);
 
 // Подключение к базе данных MongoDB
 mongoose.connect(
